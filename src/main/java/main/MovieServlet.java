@@ -67,7 +67,7 @@ public class MovieServlet extends HttpServlet {
         for (Movie movie : movies) {
             if (movie.getId() == targetId) {
                 int index = movies.indexOf(movie);
-                movies.set(index,updatedMovie);
+                movies.set(index, updatedMovie);
                 PrintWriter out = resp.getWriter();
                 out.println("Movie updated");
             }
@@ -85,8 +85,7 @@ public class MovieServlet extends HttpServlet {
         int targetId = Integer.parseInt(uriParts[uriParts.length - 1]);
         for (Movie movie : movies) {
             if (movie.getId() == targetId) {
-                int index = movies.indexOf(movie);
-                movies.remove(movieToDelete);
+                movies.remove(movieToDelete.getId());
                 PrintWriter out = resp.getWriter();
                 out.println("Movie Deleted");
             }

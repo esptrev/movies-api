@@ -4,7 +4,7 @@ public class Movie {
     private String title;
     private double rating;
     private String posterURL;
-    private int yearReleased;
+    private int year;
     private String genre;
     private String director;
     private String plot;
@@ -12,15 +12,29 @@ public class Movie {
     private int id;
 
 
-    public Movie() {
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "title='" + title + '\'' +
+                ", rating=" + rating +
+                ", posterURL='" + posterURL + '\'' +
+                ", year=" + year +
+                ", genre='" + genre + '\'' +
+                ", director='" + director + '\'' +
+                ", plot='" + plot + '\'' +
+                ", actors='" + actors + '\'' +
+                ", id=" + id +
+                '}';
+    }
 
+    public Movie() {
     }
 
     public Movie(String title, float rating, String posterURL, int yearReleased, String genre, String director, String plot, String actors, int id) {
         this.title = title;
         this.rating = rating;
         this.posterURL = posterURL;
-        this.yearReleased = yearReleased;
+        this.year = yearReleased;
         this.genre = genre;
         this.director = director;
         this.plot = plot;
@@ -63,11 +77,11 @@ public class Movie {
     }
 
     public int getYearReleased() {
-        return yearReleased;
+        return year;
     }
 
     public void setYearReleased(int yearReleased) {
-        this.yearReleased = yearReleased;
+        this.year = yearReleased;
     }
 
     public String getGenre() {
