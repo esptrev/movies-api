@@ -2,9 +2,9 @@ package data;
 
 public class Movie {
     private String title;
-    private double rating;
+    private Double rating;
     private String posterURL;
-    private int year;
+    private Integer year;
     private String genre;
     private String director;
     private String plot;
@@ -30,18 +30,17 @@ public class Movie {
     public Movie() {
     }
 
-    public Movie(String title, float rating, String posterURL, int yearReleased, String genre, String director, String plot, String actors, int id) {
+    public Movie(int id, String title, Double rating, Integer year, String genre, String director, String actors, String plot, String posterURL ) {
+        this.id = id;
         this.title = title;
         this.rating = rating;
-        this.posterURL = posterURL;
-        this.year = yearReleased;
+        this.year = year;
         this.genre = genre;
         this.director = director;
-        this.plot = plot;
         this.actors = actors;
-        this.id = id;
+        this.plot = plot;
+        this.posterURL = posterURL;
     }
-
 
     public int getId() {
         return id;
@@ -60,14 +59,6 @@ public class Movie {
         this.title = title;
     }
 
-    public double getRating() {
-        return rating;
-    }
-
-    public void setRating(float rating) {
-        this.rating = rating;
-    }
-
     public String getPosterURL() {
         return posterURL;
     }
@@ -76,12 +67,21 @@ public class Movie {
         this.posterURL = posterURL;
     }
 
-    public int getYearReleased() {
+
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
+    }
+
+    public Integer getYear() {
         return year;
     }
 
-    public void setYearReleased(int yearReleased) {
-        this.year = yearReleased;
+    public void setYear(Integer year) {
+        this.year = year;
     }
 
     public String getGenre() {
