@@ -30,7 +30,6 @@ public class MySqlMoviesDao implements MoviesDao {
 
     }
 
-
     @Override
     public List<Movie> all() throws SQLException {
         ArrayList<Movie> moviesAL = new ArrayList<>();
@@ -56,28 +55,34 @@ public class MySqlMoviesDao implements MoviesDao {
     }
 
     @Override
-    public Movie findOne(int id) throws SQLException {
-        Statement st = initConnection.createStatement();
+    public Movie findOne(int idd) throws SQLException {
+        String findSQL = "select * from moviesTable where id = ?";
 
-        ResultSet rs = st.executeQuery("select * from moviesTable where id = ?");
         Movie newMovie = null;
-        while (rs.next()) {
-            newMovie = new Movie();
-            newMovie.setId(rs.getInt("id"));
-            newMovie.setTitle(rs.getString("title"));
-            newMovie.setRating(rs.getDouble("rating"));
-            newMovie.setYear(rs.getInt("year"));
-            newMovie.setGenre(rs.getString("genre"));
-            newMovie.setDirector(rs.getString("director"));
-            newMovie.setActors(rs.getString("actors"));
-            newMovie.setPlot(rs.getString("plot"));
-            newMovie.setPosterURL(rs.getString("posterURL"));
+        try {
+            PreparedStatement pst = initConnection.prepareStatement(findSQL);
+            pst.setInt(1, idd);
+            ResultSet rs = pst.executeQuery();
 
+            while (rs.next()) {
+                newMovie = new Movie();
+                newMovie.setId(rs.getInt("id"));
+                newMovie.setTitle(rs.getString("title"));
+                newMovie.setRating(rs.getDouble("rating"));
+                newMovie.setYear(rs.getInt("year"));
+                newMovie.setGenre(rs.getString("genre"));
+                newMovie.setDirector(rs.getString("director"));
+                newMovie.setActors(rs.getString("actors"));
+                newMovie.setPlot(rs.getString("plot"));
+                newMovie.setPosterURL(rs.getString("posterURL"));
+
+            }
+            return newMovie;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        st.close();
-        System.out.println(newMovie);
-        return newMovie;
-
+        return new Movie();
     }
 
     @Override
@@ -110,12 +115,72 @@ public class MySqlMoviesDao implements MoviesDao {
         }
     }
 
-    @Override
-    public void update(Movie movie) throws SQLException {
-        //TODO: Update a movie here!
+    private void updateMovie(Movie movie) throws SQLException{
+        String sql = "update moviesTable " +
+                "set title = ?, " +
+                "rating = ?, " +
+                "year = ?, " +
+                "genre = ?, " +
+                "director= ?, " +
+                "actors = ?, " +
+                "plot = ?, " +
+                "posterURL= ? " +
+                "where id = ?";
+
+        PreparedStatement pstm = initConnection.prepareStatement(sql);
+                pstm.setString(1,movie.getTitle());
+                pstm.setInt(2,movie.getYear());
+                pstm.setDouble(3,movie.getRating());
+                pstm.setString(4,movie.getGenre());
+                pstm.setString(5,movie.getDirector());
+                pstm.setString(6,movie.getActors());
+                pstm.setString(7,movie.getPlot());
+                pstm.setString(8,movie.getPosterURL());
+                pstm.setInt(9,movie.getId());
+
+                pstm.executeUpdate();
     }
 
     @Override
+    public void update(Movie movie) throws SQLException {
+        try {
+
+            ///fetch original from DB
+           Movie movieToChange = findOne(movie.getId());
+           ////merging changes with original movie
+                if (movie.getTitle() != null) {
+                    movieToChange.setTitle(movie.getTitle());
+                }
+                if (movie.getRating() != null) {
+                    movieToChange.setRating(movie.getRating());
+                }
+                if (movie.getPosterURL() != null) {
+                    movieToChange.setPosterURL(movie.getPosterURL());
+                }
+                if (movie.getYear() != null) {
+                    movieToChange.setYear(movie.getYear());
+                }
+                if (movie.getGenre() != null) {
+                    movieToChange.setGenre(movie.getGenre());
+                }
+                if (movie.getDirector() != null) {
+                    movieToChange.setDirector(movie.getDirector());
+                }
+                if (movie.getPlot() != null) {
+                    movieToChange.setPlot(movie.getPlot());
+                }
+                if (movie.getActors() != null) {
+                    movieToChange.setActors(movie.getActors());
+                }
+                updateMovie(movieToChange);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+        @Override
     public void delete(int id) throws SQLException {
         //TODO: Annihilate a movie
     }

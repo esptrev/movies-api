@@ -3,6 +3,7 @@ package data;
 
 import dao.InMemoryMoviesDao;
 import dao.MoviesDao;
+import dao.MySqlMoviesDao;
 
 public class MoviesDaoFactory {
 
@@ -19,6 +20,8 @@ public class MoviesDaoFactory {
             case IN_MEMORY: { //yet we have one switch case. We'll get to that!
                 return new InMemoryMoviesDao();
             }
+            case MYSQL:
+                return new MySqlMoviesDao();
         }
         return null;
     }

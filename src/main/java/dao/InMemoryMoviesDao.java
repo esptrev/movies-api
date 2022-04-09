@@ -78,6 +78,11 @@ public class InMemoryMoviesDao implements MoviesDao {
     }
 
     @Override
+    public void cleanUp() {
+
+    }
+
+    @Override
     public void insert(Movie movie) {
         movie.setId(nextID++);
         int newId = movie.getId();

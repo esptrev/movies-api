@@ -165,6 +165,11 @@ public class MovieJDBC implements MoviesDao {
 
     }
 
+    @Override
+    public void cleanUp() {
+
+    }
+
 
     public static void insertMovie(Movie mn){
         String insertQue = "insert into moviesTable (title,rating,year,genre,director,actors,plot,posterURL) values(?,?,?,?,?,?,?,?)";
