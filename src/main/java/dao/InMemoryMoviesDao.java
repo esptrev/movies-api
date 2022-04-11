@@ -41,8 +41,8 @@ public class InMemoryMoviesDao implements MoviesDao {
                 if (udMovie.getRating() != null) {
                     movie.setRating(udMovie.getRating());
                 }
-                if (udMovie.getPosterURL() != null) {
-                    movie.setPosterURL(udMovie.getPosterURL());
+                if (udMovie.getPoster() != null) {
+                    movie.setPoster(udMovie.getPoster());
                 }
                 if (udMovie.getYear() != null) {
                     movie.setYear(udMovie.getYear());

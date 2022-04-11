@@ -46,7 +46,7 @@ public class MySqlMoviesDao implements MoviesDao {
             newMovie.setDirector(rs.getString("director"));
             newMovie.setActors(rs.getString("actors"));
             newMovie.setPlot(rs.getString("plot"));
-            newMovie.setPosterURL(rs.getString("posterURL"));
+            newMovie.setPoster(rs.getString("poster"));
 
             moviesAL.add(newMovie);
         }
@@ -74,7 +74,7 @@ public class MySqlMoviesDao implements MoviesDao {
                 newMovie.setDirector(rs.getString("director"));
                 newMovie.setActors(rs.getString("actors"));
                 newMovie.setPlot(rs.getString("plot"));
-                newMovie.setPosterURL(rs.getString("posterURL"));
+                newMovie.setPoster(rs.getString("poster"));
 
             }
             return newMovie;
@@ -87,7 +87,7 @@ public class MySqlMoviesDao implements MoviesDao {
 
     @Override
     public void insert(Movie movie) {
-       String insertSQL = "insert into moviesTable (title,rating,year,genre,director,actors,plot,posterURL) values(?,?,?,?,?,?,?,?)";
+       String insertSQL = "insert into moviesTable (title,rating,year,genre,director,actors,plot,poster) values(?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement psInsert = initConnection.prepareStatement(insertSQL, PreparedStatement.RETURN_GENERATED_KEYS);
             psInsert.setString(1, movie.getTitle());
@@ -97,7 +97,7 @@ public class MySqlMoviesDao implements MoviesDao {
             psInsert.setString(5, movie.getDirector());
             psInsert.setString(6, movie.getActors());
             psInsert.setString(7, movie.getPlot());
-            psInsert.setString(8, movie.getPosterURL());
+            psInsert.setString(8, movie.getPoster());
             psInsert.executeUpdate();
 
 //            ResultSet keys = psInsert.getGeneratedKeys();
@@ -124,7 +124,7 @@ public class MySqlMoviesDao implements MoviesDao {
                 "director= ?, " +
                 "actors = ?, " +
                 "plot = ?, " +
-                "posterURL= ? " +
+                "poster= ? " +
                 "where id = ?";
 
         PreparedStatement pstm = initConnection.prepareStatement(sql);
@@ -135,7 +135,7 @@ public class MySqlMoviesDao implements MoviesDao {
                 pstm.setString(5,movie.getDirector());
                 pstm.setString(6,movie.getActors());
                 pstm.setString(7,movie.getPlot());
-                pstm.setString(8,movie.getPosterURL());
+                pstm.setString(8,movie.getPoster());
                 pstm.setInt(9,movie.getId());
 
                 pstm.executeUpdate();
@@ -154,8 +154,8 @@ public class MySqlMoviesDao implements MoviesDao {
                 if (movie.getRating() != null) {
                     movieToChange.setRating(movie.getRating());
                 }
-                if (movie.getPosterURL() != null) {
-                    movieToChange.setPosterURL(movie.getPosterURL());
+                if (movie.getPoster() != null) {
+                    movieToChange.setPoster(movie.getPoster());
                 }
                 if (movie.getYear() != null) {
                     movieToChange.setYear(movie.getYear());

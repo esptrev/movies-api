@@ -21,7 +21,7 @@ public class MovieServlet extends HttpServlet {
     //    ArrayList<Movie> movies = new ArrayList<>();
     private int nextID = 1;
 
-    MoviesDao dao = MoviesDaoFactory.getMoviesDao(MoviesDaoFactory.DAOType.IN_MEMORY);
+    MoviesDao dao = MoviesDaoFactory.getMoviesDao(MoviesDaoFactory.DAOType.MYSQL);
 
 
 //    Movie firstMovie = new Movie("The Book of Eli", 5.0, "https://upload.wikimedia.org/wikipedia/en/e/e3/Book_of_eli_poster.jpg", 2010, "Sci_Fi,Action,Adventure", "Allen Hughes", "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.", "Denzel Washington,Mila Kunis,Ray Stephenson", 1);

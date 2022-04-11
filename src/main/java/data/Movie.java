@@ -3,7 +3,7 @@ package data;
 public class Movie {
     private String title;
     private Double rating;
-    private String posterURL;
+    private String poster;
     private Integer year;
     private String genre;
     private String director;
@@ -17,7 +17,7 @@ public class Movie {
         return "Movie{" +
                 "title='" + title + '\'' +
                 ", rating=" + rating +
-                ", posterURL='" + posterURL + '\'' +
+                ", poster='" + poster + '\'' +
                 ", year=" + year +
                 ", genre='" + genre + '\'' +
                 ", director='" + director + '\'' +
@@ -30,7 +30,7 @@ public class Movie {
     public Movie() {
     }
 
-    public Movie(int id, String title, Double rating, Integer year, String genre, String director, String actors, String plot, String posterURL ) {
+    public Movie(int id, String title, Double rating, Integer year, String genre, String director, String actors, String plot, String poster ) {
         this.id = id;
         this.title = title;
         this.rating = rating;
@@ -39,7 +39,7 @@ public class Movie {
         this.director = director;
         this.actors = actors;
         this.plot = plot;
-        this.posterURL = posterURL;
+        this.poster = poster;
     }
 
     public int getId() {
@@ -59,12 +59,12 @@ public class Movie {
         this.title = title;
     }
 
-    public String getPosterURL() {
-        return posterURL;
+    public String getPoster() {
+        return poster;
     }
 
-    public void setPosterURL(String posterURL) {
-        this.posterURL = posterURL;
+    public void setPoster(String poster) {
+        this.poster = poster;
     }
 
 

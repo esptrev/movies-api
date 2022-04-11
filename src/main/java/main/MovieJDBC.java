@@ -172,7 +172,7 @@ public class MovieJDBC implements MoviesDao {
 
 
     public static void insertMovie(Movie mn){
-        String insertQue = "insert into moviesTable (title,rating,year,genre,director,actors,plot,posterURL) values(?,?,?,?,?,?,?,?)";
+        String insertQue = "insert into moviesTable (title,rating,year,genre,director,actors,plot,poster) values(?,?,?,?,?,?,?,?)";
         try (PreparedStatement ps = initConn.prepareStatement(insertQue, PreparedStatement.RETURN_GENERATED_KEYS)) {
             ps.setString(1,mn.getTitle());
             ps.setDouble(2, mn.getRating());
@@ -181,7 +181,7 @@ public class MovieJDBC implements MoviesDao {
             ps.setString(5, mn.getDirector());
             ps.setString(6, mn.getActors());
             ps.setString(7, mn.getPlot());
-            ps.setString(8, mn.getPosterURL());
+            ps.setString(8, mn.getPoster());
             ps.executeUpdate();
 
             ResultSet newKeys = ps.getGeneratedKeys();
@@ -200,7 +200,7 @@ public class MovieJDBC implements MoviesDao {
 
     public static void updateMovie(Connection conn){
         String insertQue = "update moviesTable  "
-                + "set title = ?,rating = ?,year = ?,genre = ?,director = ?,actors = ?,plot = ?,posterURL = ?"
+                + "set title = ?,rating = ?,year = ?,genre = ?,director = ?,actors = ?,plot = ?,poster = ?"
                 + " where id = 15";
         try (PreparedStatement ps = conn.prepareStatement(insertQue)) {
             ps.setString(1, "Geronimo");
@@ -210,7 +210,7 @@ public class MovieJDBC implements MoviesDao {
             ps.setString(5, "director");
             ps.setString(6, "actors");
             ps.setString(7, "plot");
-            ps.setString(8, "posterURL");
+            ps.setString(8, "poster");
             ps.executeUpdate();
 
 
