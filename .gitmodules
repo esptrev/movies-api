@@ -1,0 +1,3 @@
+[submodule "movies_project_branch"]
+	path = movies_project_branch
+	url = git@github.com:esptrev/movies_project_branch.git
