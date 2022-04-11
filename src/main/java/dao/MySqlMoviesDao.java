@@ -59,6 +59,7 @@ public class MySqlMoviesDao implements MoviesDao {
         String findSQL = "select * from moviesTable where id = ?";
 
         Movie newMovie = null;
+
         try {
             PreparedStatement pst = initConnection.prepareStatement(findSQL);
             pst.setInt(1, idd);
@@ -77,6 +78,8 @@ public class MySqlMoviesDao implements MoviesDao {
                 newMovie.setPoster(rs.getString("poster"));
 
             }
+            rs.close();
+            pst.close();
             return newMovie;
 
         } catch (SQLException e) {
@@ -182,7 +185,9 @@ public class MySqlMoviesDao implements MoviesDao {
 
         @Override
     public void delete(int id) throws SQLException {
-        //TODO: Annihilate a movie
+        PreparedStatement st = initConnection.prepareStatement("delete from trevor.moviesTable where id = ?");
+        st.setInt(1,id);
+        st.executeUpdate();
     }
 
     public void cleanUp(){

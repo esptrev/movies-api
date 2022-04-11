@@ -24,23 +24,6 @@ public class MovieServlet extends HttpServlet {
     MoviesDao dao = MoviesDaoFactory.getMoviesDao(MoviesDaoFactory.DAOType.MYSQL);
 
 
-//    Movie firstMovie = new Movie("The Book of Eli", 5.0, "https://upload.wikimedia.org/wikipedia/en/e/e3/Book_of_eli_poster.jpg", 2010, "Sci_Fi,Action,Adventure", "Allen Hughes", "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.", "Denzel Washington,Mila Kunis,Ray Stephenson", 1);
-
-
-//    @Override
-//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-//        resp.setContentType("application/json");
-//        try {
-//            PrintWriter out = resp.getWriter();
-//            String movieString = new Gson().toJson(movies.toArray());
-//            out.println(movieString);
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-
     //// REFACTORED SERVLET FOR DAO  LINE WITH MOVIE STRING IS ONLY CHANGE HERE
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -51,18 +34,18 @@ public class MovieServlet extends HttpServlet {
         String[] uriParts = req.getRequestURI().split("/");
         String targetId = uriParts[uriParts.length - 1];
         resp.setContentType("application/json");
-        if(isNumeric(targetId)){
+        if (isNumeric(targetId)) {
             int numericID = Integer.parseInt(uriParts[uriParts.length - 1]);
             try {
                 PrintWriter out = resp.getWriter();
-               String oneMovie = new Gson().toJson(dao.findOne(numericID));
+                String oneMovie = new Gson().toJson(dao.findOne(numericID));
                 out.println(oneMovie);
 
             } catch (SQLException e) {
                 e.printStackTrace();
             }
 
-        }else{
+        } else {
             try {
                 PrintWriter out = resp.getWriter();
                 String movieString = new Gson().toJson(dao.all().toArray());
@@ -107,13 +90,10 @@ public class MovieServlet extends HttpServlet {
 //    }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        resp.setContentType("application/json");
-
-        BufferedReader bReader = req.getReader();
-        Movie[] newMovies = new Gson().fromJson(bReader, Movie[].class);
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp){
 
         try {
+            Movie[] newMovies = new Gson().fromJson(req.getReader(), Movie[].class);
             dao.insertAll(newMovies);
             PrintWriter out = resp.getWriter();
             out.println("Movies added");
